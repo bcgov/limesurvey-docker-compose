@@ -1,0 +1,40 @@
+version: '2'
+x-env:
+  DB_PASSWORD: &DB_PASSWORD rootpassword
+networks:
+  lime_deploy:
+volumes:
+  database:
+  plugins:
+  upload:
+  config:
+services: 
+  limesurvey:
+    image: acspri/limesurvey:5.3.13
+    build: .
+    ports:
+      - 8082:80
+    environment:
+      LIMESURVEY_DB_PASSWORD: *DB_PASSWORD
+      LIMESURVEY_ADMIN_USER: admin
+      LIMESURVEY_ADMIN_PASSWORD: password
+      LIMESURVEY_ADMIN_NAME: Lime Administrator
+      LIMESURVEY_ADMIN_EMAIL: lime@lime.lime
+    networks:
+      - lime_deploy
+    volumes:
+      - plugins:/var/www/html/plugins
+      - upload:/var/www/html/upload
+      - config:/var/www/html/application/config
+      - ./docker-entrypoint.sh:/entrypoint.sh
+      - ./docker-entrypoint.sh:/usr/local/bin/entrypoint.sh
+  mysql:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: *DB_PASSWORD
+    networks:
+      - lime_deploy
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - 3308:3306
