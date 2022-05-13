@@ -26,8 +26,6 @@ services:
       - plugins:/var/www/html/plugins
       - upload:/var/www/html/upload
       - config:/var/www/html/application/config
-      - ./docker-entrypoint.sh:/entrypoint.sh
-      - ./docker-entrypoint.sh:/usr/local/bin/entrypoint.sh
   mysql:
     image: mariadb
     environment:
