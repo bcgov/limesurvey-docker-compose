@@ -1,7 +1,11 @@
-# LimeSurvey Docker Compose
+# LimeSurvey
 ==========
 
 This repository was forked from [https://github.com/adamzammit/limesurvey-docker](https://github.com/adamzammit/limesurvey-docker)
+
+__Uses__:
+- PHP 8.0
+- Limesurvey 5.19
 
 ## How to use this image
 
